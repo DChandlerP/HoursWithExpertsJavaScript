@@ -30,6 +30,37 @@ class Group {
 
 }
 
+Group.prototype[Symbol.iterator] = function() {
+    return new IterableGroup(this);
+};
+
+class IterableGroup {
+    constructor(group) {
+        this.position = 0;
+        this.group = group;
+    }
+    //says it's unused in my linter, but I believe it's being used by value "of" group.
+    next() {
+        if (this.position < this.group.group.length) {
+            let value = {
+                value: this.group.group[this.position],
+                done: false
+            };
+            this.position++;
+            return value;
+        }
+        else {
+            return {done: true};
+        }
+
+    }
+}
+
+for (let value of Group.from(["a", "b", "c"])) {
+    console.log(value);
+}
+
+
 let group = Group.from([10, 20]);
 console.log("Had 10: ", group.has(10));
 // → true
