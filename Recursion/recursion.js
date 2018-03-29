@@ -1,10 +1,18 @@
 const int1 = prompt("Enter a number: ");
-if (isNumeric(int1)) console.log(isEven(int1));
-else console.log("I checked, what you entered wasn't a number");
+if (isNumeric(int1)) {
+    console.log(isEven(int1));
+    }
+else {
+    console.log("I checked, what you entered wasn't a number");
+}
 
 function isEven(n) {
-    if (n === 0 || n === 1) return n === 0;
-    else return n > 0 ? isEven(n-2) : isEven(n+2);
+    if (n === 0 || n === 1) {
+        return n === 0;
+    }
+    else {
+        return n > 0 ? isEven(n-2) : isEven(n+2);
+    }
 }
 
 //Prompt takes strings. This functions looks at the ASCII value of each char in the string.

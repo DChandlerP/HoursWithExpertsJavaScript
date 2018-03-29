@@ -4,19 +4,16 @@ function deepEqual(obj1, obj2) {
             console.log("Object.is says they're the same: ");
             return true;
         }
-        let a = JSON.stringify(obj1);
-        let b = JSON.stringify(obj2);
-        return a === b;
+        let obj1String = JSON.stringify(obj1);
+        let obj2String = JSON.stringify(obj2);
+        return obj1String === obj2String;
     }else {
         return false;
     }
 }
 function isObject(obj) {
-    if (obj && typeof obj === 'object'){
-        return true
-    }
-    console.log("Not an Object");
-    return false
+    return !!(obj && typeof obj === 'object');
+
 }
 
 const obj = {here: {is: "an"}, object: 2};
