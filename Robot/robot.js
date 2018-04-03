@@ -58,6 +58,11 @@ function runRobot(state, robot, memory) {
     }
 }
 
+function randomPick(array) {
+    let choice = Math.floor(Math.random() * array.length);
+    return array[choice];
+}
+
 VillageState.random = function(parcelCount = 5) {
     let parcels = [];
     for (let i = 0; i < parcelCount; i++) {
@@ -71,10 +76,6 @@ VillageState.random = function(parcelCount = 5) {
     return new VillageState("Post Office", parcels);
 };
 
-function randomPick(array) {
-    let choice = Math.floor(Math.random() * array.length);
-    return array[choice];
-}
 
 function findRoute(graph, from, to) {
     let work = [{at: from, route: []}];
@@ -115,10 +116,6 @@ function goalOrientedRobot({place, parcels}, route) {
     return {direction: route[0], memory: route.slice(1)};
 }
 
-// const a = VillageState.random();
-// console.log(runRobot(a, routeRobot, []));
-// console.log(runRobot(a, goalOrientedRobot, []));
-
 function compareRobots(robot1, memory1, robot2, memory2) {
     let r1Total = 0;
     let r2Total = 0;
@@ -129,10 +126,9 @@ function compareRobots(robot1, memory1, robot2, memory2) {
         r2Total += runRobot(village, robot2, memory2);
     }
     const r1Avg = r1Total / loopStop;
-    const r2Avg= r2Total / loopStop;
+    const r2Avg = r2Total / loopStop;
     console.log(`Robot 1 averaged ${r1Avg} steps`);
     console.log(`Robot 2 averaged ${r2Avg} steps`);
-
 }
 
 compareRobots(routeRobot, [], goalOrientedRobot, []);
