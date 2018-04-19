@@ -1,30 +1,30 @@
 class Group {
     constructor(group) {
-        this.group = [];
+        this.pGroup = [];
     }
 
     static from(object) {
         let groupBuilder = new Group({
-            group: []
+            pGroup: []
         });
-        object.forEach((value) => groupBuilder.group.push(value));
+        object.forEach((value) => groupBuilder.pGroup.push(value));
         return groupBuilder;
     }
 
     has(value) {
-        return this.group.includes(value);
+        return this.pGroup.includes(value);
     }
 
     add(value) {
-        if (!this.group.includes(value)) {
-            this.group.push(value);
+        if (!this.pGroup.includes(value)) {
+            this.pGroup.push(value);
         }
     }
-    // Wanted to use filter but had some issues.
+
     delete(value) {
-        if (this.group.includes(value)) {
-            const idx = this.group.indexOf(value);
-            return this.group.splice(idx, 1);
+        if (this.pGroup.includes(value)) {
+            const idx = this.pGroup.indexOf(value);
+            return this.pGroup.splice(idx, 1);
         }
     }
 
@@ -37,13 +37,13 @@ Group.prototype[Symbol.iterator] = function() {
 class IterableGroup {
     constructor(group) {
         this.position = 0;
-        this.group = group;
+        this.pGroup = group;
     }
-    //says it's unused in my linter, but I believe it's being used by value "of" group.
+    //says it's unused in my linter, but I believe it's being used by value "of" pGroup.
     next() {
-        if (this.position < this.group.group.length) {
+        if (this.position < this.pGroup.pGroup.length) {
             let value = {
-                value: this.group.group[this.position],
+                value: this.pGroup.pGroup[this.position],
                 done: false
             };
             this.position++;
