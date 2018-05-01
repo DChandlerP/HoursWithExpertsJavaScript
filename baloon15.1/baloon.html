@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+        p {
+            font-size: 20px;
+            transition: .5s;
+        }
+    </style>
+</head>
+<body>
+<p>🎈</p>
+<script type="text/javascript">
+    let p = document.querySelector("p");
+    let size = 20;
+    const decrease = 0.9;
+    const increase = 1.1;
+
+    function sizeChange(newSize) {
+        size = newSize;
+        p.style.fontSize = size + "px";
+    }
+
+    function handleArrows(event) {
+        if(size > 60){
+            p.innerHTML = "💥";
+            document.body.removeEventListener("keydown", handleArrow);
+        }
+        if(event.key === "ArrowUp"){
+            sizeChange(size * increase);
+        }
+        else if(event.key === "ArrowDown"){
+            sizeChange(size * decrease);
+        }
+
+    }
+
+    document.body.addEventListener("keydown", handleArrows);
+</script>
+</body>
+</html>
