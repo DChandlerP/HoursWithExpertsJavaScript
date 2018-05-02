@@ -26,6 +26,7 @@
     function handleArrows(event) {
         if(size > 60){
             p.innerHTML = "💥";
+            //seems to be a short delay before removal?
             document.body.removeEventListener("keydown", handleArrow);
         }
         if(event.key === "ArrowUp"){
