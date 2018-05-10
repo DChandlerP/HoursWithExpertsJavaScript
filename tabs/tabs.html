@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {font-family: serif;}
+
+        /* Style the tab */
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+
+        /* Style the buttons inside the tab */
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 17px;
+        }
+
+        /* Change background color of buttons on hover */
+        .tab button:hover {
+            background-color: #ddd;
+        }
+
+        /* Create an active/current tablink class */
+        .tab button.active {
+            background-color: #ccc;
+        }
+
+        /* Style the tab content */
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+    </style>
+</head>
+<body>
+<div id="wrapped">
+    <div class = "tab" data-tabname="one">Tab one</div>
+    <div class="tab" data-tabname="two">Tab two</div>
+    <div class="tab" data-tabname="three">Tab three</div>
+</div>
+<script>
+    function asTabs(node) {
+        // builds array containing node's child elements
+        let childElements = document.querySelectorAll('[data-tabname]');
+        let tabs = [];
+        for (let i = 0; i < childElements.length; i++) {
+            tabs.push(childElements[i]);
+        }
+
+        // builds and appends list of <button> elements
+        let buttonList = document.createElement('div');
+        tabs.forEach(function(tab, index) {
+            let button = document.createElement('button');
+            let buttonText = document.createTextNode(tab.dataset.tabname);
+            button.appendChild(buttonText);
+            buttonList.appendChild(button);
+            button.addEventListener('click', function() {
+                selectTab(index);
+            });
+        });
+        node.insertBefore(buttonList, node.firstChild);
+
+        // function that event listener will call
+        function selectTab(index) {
+            tabs.forEach(function(tab, i) {
+                if (index === i) {
+                    tab.style.display = '';
+                } else {
+                    tab.style.display = 'none';
+                }
+            });
+        }
+
+        selectTab(0); // to initially show first tab
+    }
+
+    asTabs(document.querySelector("#wrapped"));
+</script>
+
+</body>
+</html>

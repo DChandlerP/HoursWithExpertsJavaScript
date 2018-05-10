@@ -6,7 +6,6 @@
     <style media="screen">
         p {
             font-size: 20px;
-            transition: .5s;
         }
     </style>
 </head>
@@ -20,24 +19,28 @@
 
     function sizeChange(newSize) {
         size = newSize;
+        console.log(size);
         p.style.fontSize = size + "px";
     }
 
-    function handleArrows(event) {
-        if(size > 60){
-            p.innerHTML = "💥";
-            //seems to be a short delay before removal?
-            document.body.removeEventListener("keydown", handleArrow);
-        }
-        if(event.key === "ArrowUp"){
-            sizeChange(size * increase);
-        }
-        else if(event.key === "ArrowDown"){
-            sizeChange(size * decrease);
-        }
-
+    function balloonCheck() {
+        return size > 60;
     }
 
+    function handleArrows(event) {
+        if(event.key === "ArrowUp" && !balloonCheck()){
+            sizeChange(size * increase);
+            if(balloonCheck()){
+                p.innerHTML = "💥";
+            }
+        }
+        else if(event.key === "ArrowDown" ){
+            sizeChange(size * decrease);
+            if(p.innerHTML === "💥"){
+                p.innerHTML = "🎈";
+            }
+        }
+    }
     document.body.addEventListener("keydown", handleArrows);
 </script>
 </body>
